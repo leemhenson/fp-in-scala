@@ -1,4 +1,4 @@
-import { nonNegativeInt, RNG, SimpleRNG } from "../chapter6";
+import { nonNegativeInt, RNG, SimpleRNG } from "../src/chapter6";
 
 describe("chapter 6", () => {
   const rng42 = new SimpleRNG(42);
