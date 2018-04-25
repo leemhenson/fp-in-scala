@@ -15,3 +15,15 @@ export class SimpleRNG implements RNG {
     return [n, nextRNG];
   }
 }
+
+export type NonNegativeInt = (rng: RNG) => [number, RNG];
+
+export const nonNegativeInt: NonNegativeInt = rng => {
+  const [int, nextRng] = rng.nextInt();
+
+  if (int < Number.MIN_SAFE_INTEGER || int > Number.MAX_SAFE_INTEGER) {
+    return nonNegativeInt(nextRng);
+  }
+
+  return [Math.abs(int), nextRng];
+};
