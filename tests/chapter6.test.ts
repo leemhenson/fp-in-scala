@@ -1,4 +1,4 @@
-import { nonNegativeInt, RNG, SimpleRNG } from "../src/chapter6";
+import { nonNegativeInt, RNG, SimpleRNG, double } from "../src/chapter6";
 
 describe("chapter 6", () => {
   const rng42 = new SimpleRNG(42);
@@ -13,7 +13,7 @@ describe("chapter 6", () => {
   });
 });
 
-describe("exercise 6.1", () => {
+describe("exercise 6.1 - nonNegativeInts", () => {
   const collectNonNegativeInts = (count: number, rng: RNG, results: number[] = []): number[] => {
     if (count === 0) {
       return results;
@@ -33,6 +33,30 @@ describe("exercise 6.1", () => {
       expect(i).toBeGreaterThanOrEqual(0);
       expect(i).toBeLessThanOrEqual(Number.MAX_SAFE_INTEGER);
       expect(Number.isInteger(i)).toEqual(true);
+    });
+  });
+});
+
+describe("exercise 6.2 - double", () => {
+  const collectDoubles = (count: number, rng: RNG, results: number[] = []): number[] => {
+    if (count === 0) {
+      return results;
+    }
+
+    const [nextDouble, nextRng] = double(rng);
+
+    return collectDoubles(count - 1, nextRng, results.concat(nextDouble));
+  };
+
+  it("generates non-negative doubles in the range 0...MAX_SAFE_INTEGER", () => {
+    const rng = new SimpleRNG(Math.random());
+    const doubles = collectDoubles(100, rng);
+
+    // tslint:disable-next-line:no-expression-statement
+    doubles.forEach(i => {
+      expect(i).toBeGreaterThanOrEqual(0);
+      expect(i).toBeLessThanOrEqual(1);
+      expect(Number.isInteger(i)).toEqual(false);
     });
   });
 });

@@ -27,3 +27,12 @@ export const nonNegativeInt: NonNegativeInt = rng => {
 
   return [Math.abs(int), nextRng];
 };
+
+export type Double = (rng: RNG) => [number, RNG];
+
+export const double: Double = rng => {
+  const [int, nextRng] = nonNegativeInt(rng);
+  const double = (Number.MAX_SAFE_INTEGER - int) / Number.MAX_SAFE_INTEGER;
+
+  return [double, nextRng];
+};
