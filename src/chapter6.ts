@@ -36,3 +36,31 @@ export const double: Double = rng => {
 
   return [double, nextRng];
 };
+
+export type IntDouble = (rng: RNG) => [[number, number], RNG];
+
+export const intDouble: IntDouble = rng => {
+  const [nextInt, nextRng] = rng.nextInt();
+  const [nextDouble, nextRng2] = double(nextRng);
+
+  return [[nextInt, nextDouble], nextRng2];
+};
+
+export type DoubleInt = (rng: RNG) => [[number, number], RNG];
+
+export const DoubleInt: DoubleInt = rng => {
+  const [nextDouble, nextRng] = double(rng);
+  const [nextInt, nextRng2] = nextRng.nextInt();
+
+  return [[nextDouble, nextInt], nextRng2];
+};
+
+export type Double3 = (rng: RNG) => [[number, number, number], RNG];
+
+export const double3: Double3 = rng => {
+  const [nextDouble1, nextRng1] = double(rng);
+  const [nextDouble2, nextRng2] = double(nextRng1);
+  const [nextDouble3, nextRng3] = double(nextRng2);
+
+  return [[nextDouble1, nextDouble2, nextDouble3], nextRng3];
+};
