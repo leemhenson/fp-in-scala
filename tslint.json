@@ -16,11 +16,12 @@
     "max-line-length": [
       false
     ],
-    "no-class": true,
+    "no-bitwise": false,
+    "no-class": false,
     "no-expression-statement": [true, {"ignore-prefix": ["console.", "logger.", "describe(", "it(", "expect(", "beforeAll(", "beforeEach(", "afterEach(", "afterAll("]}],
     "no-let": true,
     "no-object-mutation": true,
-    "no-this": true,
+    "no-this": false,
     "no-var-keyword": true
   },
   "rulesDirectory": []
